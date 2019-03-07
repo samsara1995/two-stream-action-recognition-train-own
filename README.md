@@ -87,4 +87,21 @@ Average fusion| 88.5% |      
  python motion_cnn.py --resume PATH_TO_PRETRAINED_MODEL --evaluate
  ```
  
+我在two-stream-action-recognition的基础上增加了对于数据集的预处理，并可以训练自己的数据。
+增加的文件有
+spatial_cnn_own.py
 
+
+/dataloader/split_train_test_video_own.py 
+/dataloader/spatial_dataloader_own.py 
+
+/dataloader/create_preds.py 
+根据ucf-101-own里的视频，生成classind.txt和testlist01.txt和trainlist01.txt。
+根据UCF-101-own里的视频自动分割图片，保存在UCF-101-pic-own里。
+根据UCF-101_own里的分割好的图片，生成frame_count.pickle文件。
+
+训练自己数据集的步骤：
+1；将视频分类放入UCF-101-own文件夹中，运行create_preds.py 。
+2；运行spatial_cnn_own.py
+3；......
+￼
