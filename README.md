@@ -103,5 +103,6 @@ spatial_cnn_own.py
 训练自己数据集的步骤：
 1；将视频分类放入UCF-101-own文件夹中，运行create_preds.py 。
 2；运行spatial_cnn_own.py
-3；......
+3；运行densorflow.py ，得到光流文件。
+4；运行motion_cnn_own.py
 ￼
