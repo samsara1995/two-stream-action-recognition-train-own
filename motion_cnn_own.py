@@ -44,11 +44,11 @@ def main():
     print(arg)
 
     # Prepare DataLoader
-    data_loader = dataloader.Motion_DataLoader(
+    data_loader = dataloader.Motion_DataLoader_own(
         BATCH_SIZE=arg.batch_size,
         num_workers=8,
-        path='/nfs/syzhou/github/two-stream-action-recognition/tvl1_flow/',
-        ucf_list='/nfs/syzhou/github/two-stream-action-recognition/UCF_list/',
+        path='/nfs/syzhou/github/two-stream-action-recognition/tvl1_flow_own/',
+        ucf_list='/nfs/syzhou/github/two-stream-action-recognition/UCF_list_own/',
         ucf_split='01',
         in_channel=10,
     )
@@ -131,7 +131,7 @@ class Motion_CNN():
             # save model
             if is_best:
                 self.best_prec1 = prec1
-                with open('record/motion/motion_video_preds.pickle', 'wb') as f:
+                with open('record_own/motion/motion_video_preds.pickle', 'wb') as f:
                     pickle.dump(self.dic_video_level_preds, f)
                 f.close()
 
@@ -140,7 +140,7 @@ class Motion_CNN():
                 'state_dict': self.model.state_dict(),
                 'best_prec1': self.best_prec1,
                 'optimizer': self.optimizer.state_dict()
-            }, is_best, 'record/motion/checkpoint.pth.tar', 'record/motion/model_best.pth.tar')
+            }, is_best, 'record_own/motion/checkpoint.pth.tar', 'record_own/motion/model_best.pth.tar')
 
     def train_1epoch(self):
         print('==> Epoch:[{0}/{1}][training stage]'.format(self.epoch, self.nb_epochs))
@@ -190,7 +190,7 @@ class Motion_CNN():
                 'Prec@5': [round(top5.avg, 4)],
                 'lr': self.optimizer.param_groups[0]['lr']
                 }
-        record_info(info, '/nfs/syzhou/github/two-stream-action-recognition/record/motion/opf_train.csv', 'train')
+        record_info(info, '/nfs/syzhou/github/two-stream-action-recognition/record_own/motion/opf_train.csv', 'train')
 
     def validate_1epoch(self):
         print('==> Epoch:[{0}/{1}][validation stage]'.format(self.epoch, self.nb_epochs))
@@ -235,7 +235,7 @@ class Motion_CNN():
                 'Prec@1': [round(video_top1, 3)],
                 'Prec@5': [round(video_top5, 3)]
                 }
-        record_info(info, 'record/motion/opf_test.csv', 'test')
+        record_info(info, 'record_own/motion/opf_test.csv', 'test')
         return video_top1, video_loss
 
     def frame2_video_level_accuracy(self):
