@@ -101,8 +101,21 @@ spatial_cnn_own.py
 根据UCF-101_own里的分割好的图片，生成frame_count.pickle文件。
 
 训练自己数据集的步骤：
+
 1；将视频分类放入UCF-101-own文件夹中，运行create_preds.py 。
+
 2；运行spatial_cnn_own.py
+
 3；运行densorflow.py ，得到光流文件。
+
 4；运行motion_cnn_own.py
+
+粗分类：
+
+1；运行Rough_classfication.py ,取消注释切割视频这一函数，注释Basic_operation()。
+    #split_vedio()#切割视频
+    #提取光流
+    Basic_operation()
+2；运行densorflow_cu.py，提取光流。
+3；注释#split_vedio()#切割视频，取消注释Basic_operation()。得到得结果是光流变化较大得地方，也就是动作变化较大得地方，这些地方可以开始进行行为分析。
 ￼
